@@ -3,11 +3,11 @@ package com.exeter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Deck {
     private List<Card> cards = new ArrayList<>();
     private int id;
 
-    public Player(int id){
+    public Deck(int id){
         this.id = id;
     }
 
@@ -17,6 +17,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player " + Integer.toString(this.id);
+        return "Deck " + Integer.toString(this.id);
     }
 }

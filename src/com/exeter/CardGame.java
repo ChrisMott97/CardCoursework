@@ -35,7 +35,6 @@ public class CardGame {
                 System.out.println("Invalid pack location. Try again!:");
             }
         }
-
         Game game = new Game(numPlayers, packFile);
 
     }

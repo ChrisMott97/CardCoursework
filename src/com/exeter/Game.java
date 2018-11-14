@@ -9,6 +9,7 @@ import java.util.List;
 public class Game {
     List<Card> cards = new ArrayList<>();
     List<Player> players = new ArrayList<>();
+    List<Deck> decks = new ArrayList<>();
 
     public Game(int numPlayers, File packFile){
         try(BufferedReader br = new BufferedReader(new FileReader(packFile))){
@@ -21,7 +22,9 @@ public class Game {
         }catch(Exception e){
             e.printStackTrace();
         }
-
-
+        for (int i = 1; i < numPlayers + 1; i++) {
+            players.add(new Player(i));
+            decks.add(new Deck(i));
+        }
     }
 }
