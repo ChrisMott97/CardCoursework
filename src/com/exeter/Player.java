@@ -33,6 +33,19 @@ public class Player {
         return id;
     }
 
+    //UNTESTED
+    public boolean initialWinCheck(){
+        if(cards.size() == 4){
+            for (Card card :
+                    cards) {
+                if(card.getValue() != this.id)
+                    return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Player " + Integer.toString(this.id);
