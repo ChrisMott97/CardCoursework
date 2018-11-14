@@ -10,7 +10,7 @@ public class CardGame {
         Scanner sc = new Scanner(System.in);
 
         int numPlayers = 0;
-        String packLocation = "";
+        File packFile = new File("");
 
 
         System.out.println("How many players? ");
@@ -27,15 +27,16 @@ public class CardGame {
         System.out.println("Please choose a valid location for a pack:");
         boolean packLocationValidated = false;
         while(!packLocationValidated){
-            packLocation = sc.next();
-            if(validatePackLocation(packLocation)){
+            String packLocation = sc.next();
+            packFile = new File(packLocation);
+            if(validatePackLocation(packFile)){
                 packLocationValidated = true;
             }else{
                 System.out.println("Invalid pack location. Try again!:");
             }
         }
 
-        Game game = new Game(numPlayers, packLocation);
+        Game game = new Game(numPlayers, packFile);
 
     }
 
@@ -43,7 +44,7 @@ public class CardGame {
         return playerAmount > 0;
     }
 
-    private static boolean validatePackLocation(String packLocation){
-        return true;
+    private static boolean validatePackLocation(File packLocation){
+        return packLocation.exists() && !packLocation.isDirectory();
     }
 }
