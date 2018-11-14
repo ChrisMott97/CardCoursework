@@ -5,10 +5,28 @@ import java.util.List;
 
 public class Player {
     private List<Card> cards = new ArrayList<>();
+    private Deck fromDeck;
+    private Deck toDeck;
     private int id;
 
     public Player(int id){
         this.id = id;
+    }
+
+    public void setFromDeck(Deck fromDeck) {
+        this.fromDeck = fromDeck;
+    }
+
+    public void setToDeck(Deck toDeck) {
+        this.toDeck = toDeck;
+    }
+
+    public Deck getFromDeck() {
+        return fromDeck;
+    }
+
+    public Deck getToDeck() {
+        return toDeck;
     }
 
     public int getId() {
@@ -19,4 +37,5 @@ public class Player {
     public String toString() {
         return "Player " + Integer.toString(this.id);
     }
+
 }

@@ -12,6 +12,7 @@ public class Game {
     List<Deck> decks = new ArrayList<>();
 
     public Game(int numPlayers, File packFile){
+        
         try(BufferedReader br = new BufferedReader(new FileReader(packFile))){
             String line = br.readLine();
 
@@ -22,9 +23,31 @@ public class Game {
         }catch(Exception e){
             e.printStackTrace();
         }
+        
         for (int i = 1; i < numPlayers + 1; i++) {
             players.add(new Player(i));
             decks.add(new Deck(i));
+        }
+
+        for (Player player :
+                players) {
+            if(player.getId() == numPlayers){
+                for (Deck deck :
+                        decks) {
+                    if(deck.getId() == 1)
+                        player.setToDeck(deck);
+                    if(deck.getId() == numPlayers)
+                        player.setFromDeck(deck);
+                }
+            }else{
+                for (Deck deck :
+                        decks) {
+                    if(deck.getId() == player.getId())
+                        player.setFromDeck(deck);
+                    if(deck.getId() == player.getId() + 1)
+                        player.setToDeck(deck);
+                }
+            }
         }
     }
 }
