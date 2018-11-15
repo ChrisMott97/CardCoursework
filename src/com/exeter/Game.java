@@ -22,9 +22,35 @@ public class Game {
         }catch(Exception e){
             e.printStackTrace();
         }
+
         for (int i = 1; i < numPlayers + 1; i++) {
             players.add(new Player(i));
             decks.add(new Deck(i));
         }
+    }
+
+    public void dealCards(){
+        Player currentPlayer = players.get(0);
+        while (currentPlayer.getCards().size() < 4){
+            currentPlayer.addCard(cards.remove(0));
+
+            int i = players.indexOf(currentPlayer);
+            if (i == players.size() - 1)
+                currentPlayer = players.get(0);
+            else
+                currentPlayer = players.get(i+1);
+        }
+
+        Deck currentDeck = decks.get(0);
+        while (cards.size() > 0){
+            currentDeck.addCard(cards.remove(0));
+
+            int i = decks.indexOf(currentDeck);
+            if (i == decks.size() - 1)
+                currentDeck = decks.get(0);
+            else
+                currentDeck = decks.get(i+1);
+        }
+        System.out.println(cards.size());
     }
 }

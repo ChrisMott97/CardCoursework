@@ -15,6 +15,10 @@ public class Player {
         return id;
     }
 
+    public List<Card> getCards() { return cards; }
+
+    public void addCard(Card card) { this.cards.add(card); }
+
     @Override
     public String toString() {
         return "Player " + Integer.toString(this.id);
