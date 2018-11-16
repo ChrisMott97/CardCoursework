@@ -11,37 +11,25 @@ public class Game {
     List<Player> players = new ArrayList<>();
     List<Deck> decks = new ArrayList<>();
 
-    public Game(int numPlayers, File packFile){
-        
-        try(BufferedReader br = new BufferedReader(new FileReader(packFile))){
-            String line = br.readLine();
+    public Game(int numPlayers, List<Card> cards){
 
-            while (line != null){
-                cards.add(new Card(Integer.parseInt(line)));
-                line = br.readLine();
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        this.cards = cards;
 
         for (int i = 1; i < numPlayers + 1; i++) {
             players.add(new Player(i));
             decks.add(new Deck(i));
         }
 
-        for (Player player :
-                players) {
+        for (Player player : players) {
             if(player.getId() == numPlayers){
-                for (Deck deck :
-                        decks) {
+                for (Deck deck : decks) {
                     if(deck.getId() == 1)
                         player.setToDeck(deck);
                     if(deck.getId() == numPlayers)
                         player.setFromDeck(deck);
                 }
             }else{
-                for (Deck deck :
-                        decks) {
+                for (Deck deck : decks) {
                     if(deck.getId() == player.getId())
                         player.setFromDeck(deck);
                     if(deck.getId() == player.getId() + 1)
@@ -73,6 +61,7 @@ public class Game {
             else
                 currentDeck = decks.get(i+1);
         }
+
         System.out.println(cards.size());
     }
 }
