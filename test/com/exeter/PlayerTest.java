@@ -47,7 +47,7 @@ class PlayerTest {
         SUT.addCard(new Card(1));
 
         //act
-        boolean result = SUT.initialWinCheck();
+        boolean result = SUT.checkWin();
 
         //assert
         assertTrue(result);
@@ -63,7 +63,7 @@ class PlayerTest {
         SUT.addCard(new Card(2));
 
         //act
-        boolean result = SUT.initialWinCheck();
+        boolean result = SUT.checkWin();
 
         //assert
         assertFalse(result);

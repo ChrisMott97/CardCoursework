@@ -51,7 +51,7 @@ public class CardGame {
                 System.out.println("Invalid pack file. Try again!:");
             }
         }
-        Game game = new Game(numPlayers, packFile);
+        Game game = new Game(numPlayers, cards);
         game.start();
     }
 
