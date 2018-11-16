@@ -15,6 +15,16 @@ public class Deck {
         return id;
     }
 
+    public Card takeTop(){
+        Card current = cards.get(0);
+        cards.remove(0);
+        return current;
+    }
+
+    public void giveBottom(Card current){
+        cards.add(current);
+    }
+
     public List<Card> getCards() { return cards; }
 
     public void addCard(Card card) { this.cards.add(card); }

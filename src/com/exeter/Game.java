@@ -73,6 +73,9 @@ public class Game {
             else
                 currentDeck = decks.get(i+1);
         }
-        System.out.println(cards.size());
+        for (Player player :
+                players) {
+            player.start();
+        }
     }
 }
