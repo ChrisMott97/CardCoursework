@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Player implements Runnable{
+public class Player implements Runnable, BasePlayer{
     private Thread t;
+    private Mediator playerMediator;
     private List<Card> cards = new ArrayList<>();
     private Deck fromDeck;
     private Deck toDeck;
@@ -14,6 +15,10 @@ public class Player implements Runnable{
     public Player(int id){
         this.id = id;
         System.out.println("Constructing "+this);
+    }
+
+    public void setPlayerMediator(Mediator playerMediator){
+        this.playerMediator = playerMediator;
     }
 
     public void interrupt(){
@@ -27,10 +32,12 @@ public class Player implements Runnable{
                 if(checkWin()) {
                     System.out.println("    "+this + " won!");
                     t.interrupt();
+                    playerMediator.interruptAll();
+                }else{
+                    System.out.println(this + " cards: " + cards);
+                    takeFrom();
+                    giveTo();
                 }
-                System.out.println(this + " cards: " + cards);
-                takeFrom();
-                giveTo();
 
                 Thread.sleep(50);
             }

@@ -10,6 +10,7 @@ public class Game {
     List<Card> cards = new ArrayList<>();
     List<Player> players = new ArrayList<>();
     List<Deck> decks = new ArrayList<>();
+    Mediator playerMediator = new PlayerMediator();
 
     public Game(int numPlayers, File packFile){
         
@@ -29,14 +30,27 @@ public class Game {
             decks.add(new Deck(i));
         }
 
+        setupMediation();
+        setDecks();
+        dealCards();
+    }
+
+    public void setupMediation(){
+        for (Player player: players) {
+            playerMediator.add(player);
+            player.setPlayerMediator(playerMediator);
+        }
+    }
+
+    public void setDecks(){
         for (Player player :
                 players) {
-            if(player.getId() == numPlayers){
+            if(player.getId() == players.size()){
                 for (Deck deck :
                         decks) {
                     if(deck.getId() == 1)
                         player.setToDeck(deck);
-                    if(deck.getId() == numPlayers)
+                    if(deck.getId() == players.size())
                         player.setFromDeck(deck);
                 }
             }else{
@@ -50,6 +64,7 @@ public class Game {
             }
         }
     }
+
 
     public void dealCards(){
         Player currentPlayer = players.get(0);
@@ -73,8 +88,11 @@ public class Game {
             else
                 currentDeck = decks.get(i+1);
         }
-        for (Player player :
-                players) {
+
+    }
+
+    public void start(){
+        for (Player player : players) {
             player.start();
         }
     }

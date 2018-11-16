@@ -36,8 +36,7 @@ public class CardGame {
             }
         }
         Game game = new Game(numPlayers, packFile);
-
-        game.dealCards();
+        game.start();
     }
 
     private static boolean validateNumPlayers(int playerAmount){
