@@ -2,6 +2,7 @@ package com.exeter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Player implements Runnable{
     private Thread t;
@@ -24,7 +25,7 @@ public class Player implements Runnable{
         try{
             while(true){
                 if(checkWin()) {
-                    System.out.println(this + " won!");
+                    System.out.println("    "+this + " won!");
                     t.interrupt();
                 }
                 System.out.println(this + " cards: " + cards);
@@ -70,11 +71,22 @@ public class Player implements Runnable{
     }
 
     public void giveTo(){
-        //Strategy goes here!!!!!
-        System.out.println(this + " gave to " + toDeck);
-        Card current = cards.get(1);
-        toDeck.giveBottom(current);
-        cards.remove(current);
+        Random rand = new Random();
+        boolean ownCard = true;
+        int chosenCard;
+        Card current;
+
+        while(ownCard){
+            chosenCard = rand.nextInt(4)+1;
+            if(chosenCard != this.id){
+                ownCard = false;
+                current = cards.get(1);
+                toDeck.giveBottom(current);
+                cards.remove(current);
+                System.out.println(this + " gave to " + toDeck);
+            }
+        }
+
 
     }
 
@@ -86,11 +98,9 @@ public class Player implements Runnable{
 
     public void addCard(Card card) { this.cards.add(card); }
 
-    //UNTESTED
     public boolean checkWin(){
         if(cards.size() == 4){
-            for (Card card :
-                    cards) {
+            for (Card card : cards) {
                 if(card.getValue() != this.id)
                     return false;
             }
