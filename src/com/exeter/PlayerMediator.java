@@ -3,11 +3,20 @@ package com.exeter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerMediator implements Mediator {
+public class PlayerMediator implements BasePlayerMediator {
     private List<Player> players;
+    private Player winner;
 
     public PlayerMediator(){
         this.players = new ArrayList<>();
+    }
+
+    public void setWinner(Player winner) {
+        this.winner = winner;
+    }
+
+    public Player getWinner() {
+        return winner;
     }
 
     @Override

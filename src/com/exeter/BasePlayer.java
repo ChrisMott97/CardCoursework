@@ -4,7 +4,7 @@ public interface BasePlayer{
 
     void interrupt();
 
-    void setPlayerMediator(Mediator playerMediator);
+    void setPlayerMediator(PlayerMediator playerMediator);
 
     void start();
 }

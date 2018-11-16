@@ -1,6 +1,6 @@
 package com.exeter;
 
-public interface Mediator {
+public interface BasePlayerMediator {
 
     void interrupt(Player player);
 

@@ -1,0 +1,22 @@
+Player 2 initial hand is [2, 4, 3, 3]
+Player 2 draws a 4 from Deck 2.
+Player 2 discards a 3 to Deck 3.
+Player 2 current hand is [2, 4, 3, 4]
+Player 2 draws a 4 from Deck 2.
+Player 2 discards a 3 to Deck 3.
+Player 2 current hand is [2, 4, 4, 4]
+Player 2 draws a 4 from Deck 2.
+Player 2 discards a 4 to Deck 3.
+Player 2 current hand is [2, 4, 4, 4]
+Player 2 draws a 4 from Deck 2.
+Player 2 discards a 4 to Deck 3.
+Player 2 current hand is [2, 4, 4, 4]
+Player 2 draws a 3 from Deck 2.
+Player 2 discards a 4 to Deck 3.
+Player 2 current hand is [2, 4, 4, 3]
+Player 2 draws a 3 from Deck 2.
+Player 2 discards a 4 to Deck 3.
+Player 2 current hand is [2, 4, 3, 3]
+Player 1 has informed Player 2 that Player 1 has won
+Player 2 exits
+Player 2 final hand is [2, 4, 3, 3]

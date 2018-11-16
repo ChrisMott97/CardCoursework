@@ -13,6 +13,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card " + Integer.toString(this.value);
+        return Integer.toString(this.value);
     }
 }

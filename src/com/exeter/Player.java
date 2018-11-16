@@ -6,7 +6,8 @@ import java.util.Random;
 
 public class Player implements Runnable, BasePlayer{
     private Thread t;
-    private Mediator playerMediator;
+    private PlayerMediator playerMediator;
+    private PlayerDeckMediator playerDeckMediator;
     private List<Card> cards = new ArrayList<>();
     private Deck fromDeck;
     private Deck toDeck;
@@ -17,8 +18,12 @@ public class Player implements Runnable, BasePlayer{
         System.out.println("Constructing "+this);
     }
 
-    public void setPlayerMediator(Mediator playerMediator){
+    public void setPlayerMediator(PlayerMediator playerMediator){
         this.playerMediator = playerMediator;
+    }
+
+    public void setPlayerDeckMediator(PlayerDeckMediator playerDeckMediator) {
+        this.playerDeckMediator = playerDeckMediator;
     }
 
     public void interrupt(){
@@ -30,26 +35,56 @@ public class Player implements Runnable, BasePlayer{
         try{
             while(true){
                 if(checkWin()) {
-                    System.out.println("    "+this + " won!");
+                    playerDeckMediator.output(
+                            String.format("player%d_output.txt", this.id),
+                            String.format("Player %d win!", this.id));
+
+                    playerMediator.setWinner(this);
                     t.interrupt();
                     playerMediator.interruptAll();
+                    playerDeckMediator.interrupt();
                 }else{
                     System.out.println(this + " cards: " + cards);
                     takeFrom();
                     giveTo();
+                    playerDeckMediator.output(
+                            String.format("player%d_output.txt", this.id),
+                            String.format("Player %d current hand is %s", this.id, this.cards));
                 }
-
                 Thread.sleep(50);
             }
 
         }catch(InterruptedException e){
+            if(playerMediator.getWinner() == this){
+                playerDeckMediator.output(
+                        String.format("player%d_output.txt", this.id),
+                        String.format("Player %d exits", this.id));
+                playerDeckMediator.output(
+                        String.format("player%d_output.txt", this.id),
+                        String.format("Player %d final hand is %s", this.id, this.cards));
+            }else{
+                playerDeckMediator.output(
+                        String.format("player%d_output.txt", this.id),
+                        String.format("Player %d has informed Player %d that Player %d has won",
+                                playerMediator.getWinner().getId(),
+                                this.id,
+                                playerMediator.getWinner().getId()));
+                playerDeckMediator.output(
+                        String.format("player%d_output.txt", this.id),
+                        String.format("Player %d exits", this.id));
+                playerDeckMediator.output(
+                        String.format("player%d_output.txt", this.id),
+                        String.format("Player %d final hand is %s", this.id, this.cards));
+            }
             System.out.println(this + "'s Thread interrupted");
         }
         System.out.println(this + "'s Thread exiting");
     }
 
     public void start(){
-        System.out.println("Starting thread for "+this);
+        playerDeckMediator.output(
+                String.format("player%d_output.txt", this.id),
+                String.format("Player %d initial hand is %s", this.id, this.cards));
         if(t==null){
             t = new Thread(this, Integer.toString(id));
             t.start();
@@ -74,7 +109,13 @@ public class Player implements Runnable, BasePlayer{
 
     public void takeFrom(){
         System.out.println(this + " took from " + fromDeck);
-        cards.add(fromDeck.takeTop());
+        Card newTop;
+        if((newTop = fromDeck.takeTop()) != null){
+            playerDeckMediator.output(
+                    String.format("player%d_output.txt", this.id),
+                    String.format("Player %d draws a %d from Deck %d.", this.id, newTop.getValue(), fromDeck.getId()));
+            cards.add(newTop);
+        }
     }
 
     public void giveTo(){
@@ -84,13 +125,15 @@ public class Player implements Runnable, BasePlayer{
         Card current;
 
         while(ownCard){
-            chosenCard = rand.nextInt(4)+1;
-            if(chosenCard != this.id){
+            chosenCard = rand.nextInt(4);
+            current = cards.get(chosenCard);
+            if(current.getValue() != this.id){
                 ownCard = false;
-                current = cards.get(1);
                 toDeck.giveBottom(current);
+                playerDeckMediator.output(
+                        String.format("player%d_output.txt", this.id),
+                        String.format("Player %d discards a %d to Deck %d.", this.id, current.getValue(), toDeck.getId()));
                 cards.remove(current);
-                System.out.println(this + " gave to " + toDeck);
             }
         }
 

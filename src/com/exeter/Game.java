@@ -1,16 +1,20 @@
 package com.exeter;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Game {
-    List<Card> cards = new ArrayList<>();
-    List<Player> players = new ArrayList<>();
-    List<Deck> decks = new ArrayList<>();
-    Mediator playerMediator = new PlayerMediator();
+    private List<Card> cards = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
+    private List<Deck> decks = new ArrayList<>();
+    private PlayerMediator playerMediator = new PlayerMediator();
+    private PlayerDeckMediator playerDeckMediator = new PlayerDeckMediator();
 
     public Game(int numPlayers, List<Card> cards){
 
@@ -22,16 +26,40 @@ public class Game {
         }
 
         setupMediation();
+        clearFiles();
         setDecks();
         dealCards();
+    }
+
+    public void clearFiles(){
+        Path filePath;
+        for (Player player :
+                players) {
+            filePath = Paths.get("player"+player.getId()+"_output.txt");
+            try{
+                Files.deleteIfExists(filePath);
+                Files.createFile(filePath);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void setupMediation(){
         for (Player player: players) {
             playerMediator.add(player);
+            playerDeckMediator.addPlayer(player);
             player.setPlayerMediator(playerMediator);
+            player.setPlayerDeckMediator(playerDeckMediator);
+
         }
+        for (Deck deck: decks){
+            playerDeckMediator.addDeck(deck);
+            deck.setPlayerDeckMediator(playerDeckMediator);
+        }
+
     }
+
 
     public void setDecks(){
         for (Player player :
@@ -85,5 +113,6 @@ public class Game {
         for (Player player : players) {
             player.start();
         }
+        playerDeckMediator.start();
     }
 }
