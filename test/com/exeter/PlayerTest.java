@@ -3,16 +3,18 @@ package com.exeter;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 class PlayerTest {
     Player SUT;
+    BasePlayerMediator playerMediator;
+    BasePlayerDeckMediator playerDeckMediator;
 
     @Before
     void setup(){
-        SUT = new Player(1);
+        playerMediator = new MockPlayerMediator();
+        playerDeckMediator = new MockPlayerDeckMediator();
+        SUT = new Player(1, playerMediator, playerDeckMediator);
     }
 
     @Test
@@ -24,19 +26,19 @@ class PlayerTest {
 
     @Test
     void addCard() {
-        SUT.addCard(new Card(1));
-        SUT.addCard(new Card(2));
+        SUT.deal(new Card(1));
+        SUT.deal(new Card(2));
 
-        assertEquals(1, SUT.getCards().get(0).getValue());
-        assertEquals(2, SUT.getCards().get(1).getValue());
+        assertEquals(1, SUT.getHand().get(0).getValue());
+        assertEquals(2, SUT.getHand().get(1).getValue());
     }
 
     @Test
     void checkWin_whenWinningHand_returnsTrue() {
-        SUT.addCard(new Card(1));
-        SUT.addCard(new Card(1));
-        SUT.addCard(new Card(1));
-        SUT.addCard(new Card(1));
+        SUT.deal(new Card(1));
+        SUT.deal(new Card(1));
+        SUT.deal(new Card(1));
+        SUT.deal(new Card(1));
 
         boolean result = SUT.checkWin();
 
@@ -45,10 +47,10 @@ class PlayerTest {
 
     @Test
     void checkWin_whenNotWinningHand_returnsFalse() {
-        SUT.addCard(new Card(2));
-        SUT.addCard(new Card(2));
-        SUT.addCard(new Card(2));
-        SUT.addCard(new Card(2));
+        SUT.deal(new Card(2));
+        SUT.deal(new Card(2));
+        SUT.deal(new Card(2));
+        SUT.deal(new Card(2));
 
         boolean result = SUT.checkWin();
 

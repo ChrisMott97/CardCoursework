@@ -1,10 +1,8 @@
 package com.exeter;
 
-public interface BasePlayer{
+public interface BasePlayer extends Runnable{
 
     void interrupt();
-
-    void setPlayerMediator(PlayerMediator playerMediator);
 
     void start();
 }
