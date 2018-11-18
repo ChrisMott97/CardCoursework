@@ -137,8 +137,9 @@ public class Player implements BasePlayer{
 
     public boolean checkWin(){
         if(hand.size() == 4){
+            int v = hand.get(0).getValue();
             for (Card card : hand) {
-                if(card.getValue() != this.id)
+                if(card.getValue() != v)
                     return false;
             }
             return true;
