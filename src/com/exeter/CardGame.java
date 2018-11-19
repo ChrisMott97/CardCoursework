@@ -2,64 +2,78 @@ package com.exeter;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class CardGame {
+    static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
-        int numPlayers = 0;
-        File packFile = new File("");
-        List<Card> cards = new ArrayList<Card>();
+        int numPlayers = getNumPlayers();
+        List<Card>cards = getCards(numPlayers);
 
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("How many players? ");
-        boolean playersValidated = false;
-
-        while(!playersValidated){
-            numPlayers = sc.nextInt();
-
-            if(validatePlayers(numPlayers))
-                playersValidated = true;
-            else
-                System.out.println("Players must be greater than 0. Try again!:");
-        }
-
-        System.out.println("Please choose a valid location for a pack:");
-        boolean packValidated = false;
-
-        while(!packValidated){
-            String packLocation = sc.next();
-            packFile = new File(packLocation);
-            cards = new ArrayList<Card>();
-
-            try (BufferedReader br = new BufferedReader(new FileReader(packFile))) {
-                String line = br.readLine();
-
-                while (line != null) {
-                    cards.add(new Card(Integer.parseInt(line)));
-                    line = br.readLine();
-                }
-
-                if (validatePack(cards, numPlayers))
-                    packValidated = true;
-                else
-                    System.out.println("Not enough cards in pack. Try again!:");
-            } catch (Exception e) {
-                System.out.println("Invalid pack file. Try again!:");
-            }
-        }
         Game game = new Game(numPlayers, cards);
         game.start();
     }
 
-    private static boolean validatePlayers(int playerAmount){
-        return playerAmount > 0;
+    private static int getNumPlayers(){
+        int num = 0;
+        boolean firstTry = true;
+
+        System.out.println("How many players?:");
+
+        while(num <= 0) {
+            num = sc.nextInt();
+
+            if(!firstTry)
+                System.out.println("Players must be greater than 0. Try again!:");
+
+            firstTry = false;
+        }
+        return num;
     }
 
-    private static boolean validatePack(List<Card> cards, int numplayers){
-        return cards.size() >= 8 * numplayers;
+    //should numplayers be private static var?
+    private static List<Card> getCards(int numPlayers){
+        List<Card> cards = new ArrayList<>();
+        boolean firstTry = true;
+
+        System.out.println("Please choose a valid location for a pack:");
+
+        while(cards.size() < 8 * numPlayers){
+            cards = parseCardsFromFile(new File(sc.next()));
+
+            if (cards != null){
+                if (!firstTry)
+                    System.out.println("Not enough cards in pack. Try again!:");
+
+                firstTry = false;
+            } else {
+                System.out.println("Invalid pack file. Try again!:");
+                cards = new ArrayList<>();
+            }
+        }
+
+        return cards;
+    }
+
+    private static List<Card> parseCardsFromFile(File file){
+        List<Card> cards = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))){
+            String line = br.readLine();
+
+            while (line != null) {
+                cards.add(new Card(Integer.parseInt(line)));
+                line = br.readLine();
+            }
+        } catch (Exception e){
+            return null;
+        }
+
+        return cards;
     }
 }

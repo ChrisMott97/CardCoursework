@@ -1,6 +1,8 @@
 package com.exeter;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,65 +12,29 @@ import java.util.List;
 public class Game {
     private List<Player> players = new ArrayList<>();
     private List<Deck> decks = new ArrayList<>();
-    private PlayerMediator playerMediator = new PlayerMediator();
-    private PlayerDeckMediator playerDeckMediator = new PlayerDeckMediator();
+    private BaseMediator mediator;
+    private GameLogger logger;
 
     public Game(int numPlayers, List<Card> cards){
-        clearFiles();
-        generateGameObjs(numPlayers);
-        assignDecks();
+        logger = new GameLogger(numPlayers);
+        mediator = new Mediator(logger);
+
+        initialise(numPlayers);
         dealCards(cards);
     }
 
-    private void generateGameObjs(int numPlayers){
+    private void initialise(int numPlayers){
         for (int i = 1; i < numPlayers + 1; i++) {
-            Player player = new Player(i, playerMediator, playerDeckMediator);
-            Deck deck = new Deck(i, playerDeckMediator);
+            Player player = new Player(i, mediator);
+            Deck deck = new Deck(i, mediator);
 
-            playerMediator.add(player);
-            playerDeckMediator.addPlayer(player);
-            playerDeckMediator.addDeck(deck);
+            mediator.add(player);
+            mediator.add(deck);
 
             players.add(player);
             decks.add(deck);
         }
     }
-
-    //encapsulate file writing in player loggers
-    private void clearFiles(){
-        Path filePath;
-        for (Player player : players) {
-            filePath = Paths.get("player"+player.getId()+"_output.txt");
-            try{
-                Files.deleteIfExists(filePath);
-                Files.createFile(filePath);
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void assignDecks(){
-        for (Player player : players) {
-            if(player.getId() == players.size()){
-                for (Deck deck :
-                        decks) {
-                    if(deck.getId() == 1)
-                        player.setToDeck(deck);
-                    if(deck.getId() == players.size())
-                        player.setFromDeck(deck);
-                }
-            }else{
-                for (Deck deck : decks) {
-                    if(deck.getId() == player.getId())
-                        player.setFromDeck(deck);
-                    if(deck.getId() == player.getId() + 1)
-                        player.setToDeck(deck);
-                }
-            }
-        }
-    }
-
 
     private void dealCards(List<Card> cards){
         Player currentPlayer = players.get(0);
@@ -95,10 +61,5 @@ public class Game {
 
     }
 
-    public void start(){
-        for (Player player : players) {
-            player.start();
-        }
-        playerDeckMediator.start();
-    }
+    public void start(){ mediator.start(); }
 }

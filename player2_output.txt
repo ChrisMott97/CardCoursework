@@ -1,21 +1,33 @@
-Player 2 initial hand is [2, 4, 3, 3]
-Player 2 draws a 4 from Deck 2.
-Player 2 discards a 3 to Deck 3.
-Player 2 current hand is [2, 4, 3, 4]
-Player 1 has informed Player 2 that Player 1 has won
-Player 2 exits
-Player 2 final hand is [2, 4, 3, 4]
-Player 2 initial hand is [2, 4, 3, 3]
-Player 2 initial hand is [2, 4, 3, 3]
-Player 2 draws a 4 from Deck 2.
-Player 2 current hand is [2, 3, 3, 4]
-Player 2 discards a 3 to Deck 3.
-Player 2 current hand is [2, 3, 4, 4]
-Player 2 draws a 4 from Deck 2.
-Player 2 discards a 4 to Deck 3.
-Player 2 current hand is [2, 3, 4, 4]
-Player 2 draws a 4 from Deck 2.
-Player 2 discards a 3 to Deck 3.
-Player 2 current hand is [2, 4, 4, 4]
-Player 1 has informed Player 2 that Player 1 has won
-Player 2 exits
+Player 2 initial hand: [2, 4, 3, 3]
+Player 2 drew Card 4 from Deck 2
+Player 2 discards Card 4 to Deck 3
+Player 2 hand: [2, 3, 3, 4]
+Player 2 drew Card 4 from Deck 2
+Player 2 discards Card 3 to Deck 3
+Player 2 hand: [2, 3, 4, 4]
+Player 2 drew Card 4 from Deck 2
+Player 2 discards Card 4 to Deck 3
+Player 2 hand: [2, 3, 4, 4]
+Player 2 drew Card 4 from Deck 2
+Player 2 discards Card 4 to Deck 3
+Player 2 hand: [2, 3, 4, 4]
+Player 2 drew Card 3 from Deck 2
+Player 2 discards Card 3 to Deck 3
+Player 2 hand: [2, 3, 4, 4]
+Player 2 drew Card 2 from Deck 2
+Player 2 discards Card 4 to Deck 3
+Player 2 hand: [2, 3, 4, 2]
+Player 2 drew Card 2 from Deck 2
+Player 2 discards Card 4 to Deck 3
+Player 2 hand: [2, 3, 2, 2]
+Player 2 drew Card 4 from Deck 2
+Player 2 discards Card 3 to Deck 3
+Player 2 hand: [2, 2, 2, 4]
+Player 2 drew Card 3 from Deck 2
+Player 2 discards Card 3 to Deck 3
+Player 2 hand: [2, 2, 2, 4]
+Player 2 drew Card 4 from Deck 2
+Player 2 discards Card 4 to Deck 3
+Player 2 hand: [2, 2, 2, 4]
+Player 3 told Player 2 that it has won
+Player 2 final hand: [2, 2, 2, 4]
