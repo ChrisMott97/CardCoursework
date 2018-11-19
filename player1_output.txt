@@ -1,3 +1,21 @@
-Player 1 initial hand: [1, 1, 1, 1]
+Player 1 initial hand: [3, 1, 1, 3]
+Player 1 drew Card 2 from Deck 4
+Player 1 discards Card 2 to Deck 2
+Player 1 hand: [3, 1, 1, 3]
+Player 1 drew Card 4 from Deck 4
+Player 1 discards Card 4 to Deck 2
+Player 1 hand: [3, 1, 1, 3]
+Player 1 drew Card 2 from Deck 4
+Player 1 discards Card 2 to Deck 2
+Player 1 hand: [3, 1, 1, 3]
+Player 1 drew Card 4 from Deck 4
+Player 1 discards Card 3 to Deck 2
+Player 1 hand: [3, 1, 1, 4]
+Player 1 drew Card 1 from Deck 4
+Player 1 discards Card 3 to Deck 2
+Player 1 hand: [1, 1, 4, 1]
+Player 1 drew Card 1 from Deck 4
+Player 1 discards Card 4 to Deck 2
+Player 1 hand: [1, 1, 1, 1]
 Player 1 has won
 Player 1 final hand: [1, 1, 1, 1]
