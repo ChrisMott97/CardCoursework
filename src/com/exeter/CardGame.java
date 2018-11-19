@@ -26,7 +26,13 @@ public class CardGame {
         System.out.println("How many players?:");
 
         while(num <= 0) {
-            num = sc.nextInt();
+            try {
+                num = sc.nextInt();
+            } catch (Exception e){
+                System.out.println("Input is not an integer");
+                sc.nextLine();
+                continue;
+            }
 
             if(!firstTry)
                 System.out.println("Players must be greater than 0. Try again!:");

@@ -3,6 +3,8 @@ package com.exeter;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Field;
+
 import static org.junit.Assert.assertEquals;
 
 class PlayerTest {
@@ -54,24 +56,4 @@ class PlayerTest {
 //
 //        assertFalse(result);
 //    }
-
-    @Test
-    void interrupt() {
-    }
-
-    @Test
-    void run() {
-    }
-
-    @Test
-    void start() {
-    }
-
-    @Test
-    void takeFrom() {
-    }
-
-    @Test
-    void giveTo() {
-    }
 }

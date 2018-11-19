@@ -13,55 +13,68 @@ public class GameLogger implements BaseGameLogger {
         for (int i = 0; i < numPlayers; i++) {
             logs.add(new ArrayList<>());
         }
-        Path filePath;
         for (int i = 0; i < numPlayers; i++) {
-            filePath = Paths.get("player"+(i+1)+"_output.txt");
+            Path deckFilePath = Paths.get("deck"+(i+1)+"_output.txt");
+            Path playerFilePath = Paths.get("player"+(i+1)+"_output.txt");
             try{
-                Files.deleteIfExists(filePath);
-                Files.createFile(filePath);
+                Files.deleteIfExists(deckFilePath);
+                Files.createFile(deckFilePath);
+                Files.deleteIfExists(playerFilePath);
+                Files.createFile(playerFilePath);
             }catch(IOException e){
                 e.printStackTrace();
             }
         }
     }
 
-    public void logInitialPlayerState(Player player){
+    public void initialPlayerState(Player player){
         logs.get(player.getId()-1).add(
                 String.format("%s initial hand: %s\n", player.toString(), player.getHand().toString())
         );
     }
 
-    public void logPlayerState(Player player){
+    public void playerState(Player player){
         logs.get(player.getId()-1).add(
             String.format("%s hand: %s\n", player.toString(), player.getHand().toString())
         );
     }
 
-    public void logFinalPlayerState(Player player){
-        logs.get(player.getId()-1).add(
-            String.format("%s told %s that it has won\n", player.getWinner().toString(), player.toString())
-        );
+    public void finalise(Player player){
+        if (player.equals(player.getWinner())){
+            logs.get(player.getId()-1).add(
+                    String.format("%s has won\n", player.toString())
+            );
+        } else {
+            logs.get(player.getId()-1).add(
+                    String.format("%s told %s that it has won\n", player.getWinner().toString(), player.toString())
+            );
+        }
         logs.get(player.getId()-1).add(
             String.format("%s final hand: %s\n", player.toString(), player.getHand().toString())
         );
         write(player);
-        System.out.println(logs.get(player.getId()-1));
     }
 
-    public void logPlayerDraw(Player player, Deck deck, Card card){
+    public void playerDraw(Player player, Deck deck, Card card){
         logs.get(player.getId()-1).add(
             String.format("%s drew Card %s from %s\n", player.toString(), card.toString(), deck.toString())
         );
     }
-    public void logPlayerDiscard(Player player, Deck deck, Card card){
+    public void playerDiscard(Player player, Deck deck, Card card){
         logs.get(player.getId()-1).add(
             String.format("%s discards Card %s to %s\n", player.toString(), card.toString(), deck.toString())
         );
     }
 
-    public void logDecks(List<Deck> decks){
+    public void decks(List<Deck> decks){
         for (Deck deck : decks){
-            System.out.printf("%s final state %s\n", deck, deck.getCards());
+            Path path = Paths.get("deck"+deck.getId()+"_output.txt");
+            String line = String.format("%s final state %s\n", deck, deck.getCards());
+            try{
+                Files.write(path, line.getBytes(), StandardOpenOption.APPEND);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
         }
 
     }
