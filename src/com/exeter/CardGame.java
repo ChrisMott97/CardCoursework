@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class CardGame {
     static Scanner sc = new Scanner(System.in);
@@ -14,8 +15,9 @@ public class CardGame {
     public static void main(String[] args) {
         int numPlayers = getNumPlayers();
         List<Card>cards = getCards(numPlayers);
+        GameLogger logger = new Logger(numPlayers);
 
-        Game game = new Game(numPlayers, cards);
+        Game game = new Game(numPlayers, cards, logger);
         game.start();
     }
 

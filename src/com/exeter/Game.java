@@ -37,8 +37,8 @@ public class Game implements BaseGame {
     private List<Deck> decks = new ArrayList<>();
     private BaseGameLogger logger;
 
-    Game (int numPlayers, List<Card> cards){
-        this.logger = new GameLogger(numPlayers);
+    Game (int numPlayers, List<Card> cards, BaseGameLogger logger){
+        this.logger = logger;
         initialise(numPlayers);
         dealCards(cards);
     }
