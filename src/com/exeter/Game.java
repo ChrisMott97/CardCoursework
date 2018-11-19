@@ -1,31 +1,3 @@
-//package com.exeter;
-//
-//import java.io.BufferedWriter;
-//import java.io.IOException;
-//import java.io.Writer;
-//import java.nio.file.Files;
-//import java.nio.file.Path;
-//import java.nio.file.Paths;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//public class Game {
-//    private List<Player> players = new ArrayList<>();
-//    private List<Deck> decks = new ArrayList<>();
-//    private BaseGame mediator;
-//    private GameLogger logger;
-//
-//    public Game(int numPlayers, List<Card> cards){
-//        logger = new GameLogger(numPlayers);
-//        mediator = new Mediator(logger);
-//
-//        initialise(numPlayers);
-//        dealCards(cards);
-//    }
-//
-//    public void start(){ mediator.start(); }
-//}
-
 package com.exeter;
 
 import java.util.ArrayList;
@@ -42,6 +14,10 @@ public class Game implements BaseGame {
         initialise(numPlayers);
         dealCards(cards);
     }
+
+    public List<Player> getPlayers(){ return players; }
+
+    public void setPlayers(List<Player> players){ this.players = players; };
 
     public void start() {
         for (Player player : players){

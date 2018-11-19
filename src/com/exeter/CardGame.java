@@ -15,7 +15,7 @@ public class CardGame {
     public static void main(String[] args) {
         int numPlayers = getNumPlayers();
         List<Card>cards = getCards(numPlayers);
-        GameLogger logger = new Logger(numPlayers);
+        GameLogger logger = new GameLogger(numPlayers);
 
         Game game = new Game(numPlayers, cards, logger);
         game.start();

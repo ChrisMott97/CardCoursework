@@ -79,7 +79,7 @@ public class GameLogger implements BaseGameLogger {
 
     }
 
-    public void write(Player player){
+    private void write(Player player){
         Path path = Paths.get("player"+player.getId()+"_output.txt");
         for (String line :
                 logs.get(player.getId() - 1)) {
