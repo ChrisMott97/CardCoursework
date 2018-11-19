@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 Player 2 initial hand: [2, 4, 3, 3]
 Player 2 drew Card 4 from Deck 2
 Player 2 discards Card 4 to Deck 3
@@ -31,3 +33,4 @@ Player 2 discards Card 4 to Deck 3
 Player 2 hand: [2, 2, 2, 3]
 Player 1 told Player 2 that it has won
 Player 2 final hand: [2, 2, 2, 3]
+>>>>>>> develop

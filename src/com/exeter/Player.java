@@ -14,7 +14,9 @@ public class Player implements BasePlayer{
         this.id = id;
         this.mediator = mediator;
     }
-
+    /*
+    @return     the id of the given Player.
+     */
     public int getId() {
         return id;
     }

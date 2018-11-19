@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+Deck 4 final state [2, 4, 2, 4]
+=======
 Deck 4 final state [1, 2, 4, 4, 4]
+>>>>>>> develop
