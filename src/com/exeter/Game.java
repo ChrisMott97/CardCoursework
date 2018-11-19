@@ -37,12 +37,23 @@ public class Game implements BaseGame {
     private List<Deck> decks = new ArrayList<>();
     private BaseGameLogger logger;
 
+    /**
+     * Constructor for Game which also acts as a Mediator between {@link Player} and {@link Deck}.
+     *
+     * @param numPlayers    number of players determined by input in {@link CardGame}.
+     * @param cards         the initial pack of cards determined by input in {@link CardGame}.
+     * @param logger        the logger class that manages outputting to files.
+     */
     Game (int numPlayers, List<Card> cards, BaseGameLogger logger){
         this.logger = logger;
         initialise(numPlayers);
         dealCards(cards);
     }
 
+
+    /**
+     * Starts all player threads and sets up the logger.
+     */
     public void start() {
         for (Player player : players){
             logger.initialPlayerState(player);
@@ -50,13 +61,27 @@ public class Game implements BaseGame {
         }
     }
 
+    /**
+     * Global interrupt function that calls all {@link Player} interrupt functions.
+     * Used for end game so also logs the final {@link Deck}.
+     *
+     * @param source    the player that called the interrupt (the person who's won).
+     */
     public synchronized void interrupt(Player source) {
+        //interrupt all players
         for (Player player : players) {
             player.interrupt(source);
         }
         logger.decks(decks);
     }
 
+    /**
+     * Regularly used function to allow {@link Player} to check their hand.
+     * Synchronized to ensure Thread Safety.
+     *
+     * @param player    the {@link Player} that sent the call.
+     * @return          whether or not the calling {@link Player} has won.
+     */
     public synchronized boolean checkWin(Player player){
         List<Card> hand = player.getHand();
 
@@ -68,10 +93,14 @@ public class Game implements BaseGame {
             }
             return true;
         }
-        //is there opportunity for a hand that is not size 4? (atomic action?)
         return false;
     }
 
+    /**
+     * Used to allow the calling {@link Player} to take a turn.
+     *
+     * @param player    the calling {@link Player} taking the turn.
+     */
     public synchronized void takeTurn(Player player){
         if(drawCard(player)){
             discardCard(player);
@@ -79,11 +108,23 @@ public class Game implements BaseGame {
         }
     }
 
+    /**
+     * Reports the last hand and the winning {@link Player}.
+     *
+     * @param player    the winning {@link Player}.
+     */
     public void finalPlayerState(Player player){
         logger.finalise(player);
     }
 
+    /**
+     * Removes a {@link Card} from the corresponding {@link Deck} and gives it to {@link Player}.
+     *
+     * @param player    the {@link Player} who will gain the {@link Card}.
+     * @return          whether or not the draw was successful.
+     */
     private boolean drawCard(Player player){
+        //draw from the left deck
         int sourceDeckId = (player.getId()-1 == 0) ? players.size()-1 : player.getId()-1;
         Deck source = decks.get(sourceDeckId);
 
@@ -98,7 +139,13 @@ public class Game implements BaseGame {
 
     }
 
+    /**
+     * Removes a given {@link Player} {@link Card} and places it in the next {@link Deck}.
+     *
+     * @param player    the {@link Player} losing the {@link Card}.
+     */
     private void discardCard(Player player){
+        //discard to the right deck
         int burnerDeckId = (player.getId() == players.size()) ? 0 : player.getId();
         Deck burner = decks.get(burnerDeckId);
 
@@ -118,6 +165,11 @@ public class Game implements BaseGame {
         }
     }
 
+    /**
+     * Main Game initialization involving ensuring the Game's {@link Player} and {@link Deck} are stored in memory.
+     *
+     * @param numPlayers    number of {@link Player}'s in the Game.
+     */
     private void initialise(int numPlayers){
         for (int i = 1; i < numPlayers + 1; i++) {
             Player player = new Player(i, this);
@@ -128,6 +180,11 @@ public class Game implements BaseGame {
         }
     }
 
+    /**
+     * Deals all the {@link Card}s from the initial pile to {@link Player}s and {@link Deck}s.
+     *
+     * @param cards     the initial pile of cards.
+     */
     private void dealCards(List<Card> cards){
         Player currentPlayer = players.get(0);
 

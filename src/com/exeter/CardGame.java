@@ -9,9 +9,16 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+
 public class CardGame {
     static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Main function that runs when the program is run.
+     * Takes and validates input then starts the {@link Game}.
+     *
+     * @param args  command-line arguments.
+     */
     public static void main(String[] args) {
         int numPlayers = getNumPlayers();
         List<Card>cards = getCards(numPlayers);
@@ -21,6 +28,11 @@ public class CardGame {
         game.start();
     }
 
+    /**
+     * Takes as input from the user, the number of {@link Player} in the {@link Game}.
+     *
+     * @return      int as the number of players.
+     */
     private static int getNumPlayers(){
         int num = 0;
         boolean firstTry = true;
@@ -44,13 +56,19 @@ public class CardGame {
         return num;
     }
 
-    //should numplayers be private static var?
+    /**
+     * Takes as input from the user, the location of the pack file (txt).
+     *
+     * @param numPlayers    number of players used to validate if the pack file is valid.
+     * @return              list of {@link Card}s that were represented in the pack file.
+     */
     private static List<Card> getCards(int numPlayers){
         List<Card> cards = new ArrayList<>();
         boolean firstTry = true;
 
         System.out.println("Please choose a valid location for a pack:");
 
+        //validating the pack file for 8n
         while(cards.size() < 8 * numPlayers){
             cards = parseCardsFromFile(new File(sc.next()));
 
@@ -68,6 +86,12 @@ public class CardGame {
         return cards;
     }
 
+    /**
+     * Reads the pack file and turns the numbers into {@link Card}s.
+     *
+     * @param file  location of the pack file.
+     * @return      {@link Card}s from the pack file.
+     */
     private static List<Card> parseCardsFromFile(File file){
         List<Card> cards = new ArrayList<>();
 
