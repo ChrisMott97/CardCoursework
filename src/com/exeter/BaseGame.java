@@ -1,10 +1,8 @@
 package com.exeter;
 
-public interface BaseMediator {
-    void add(Player player);
+import java.util.List;
 
-    void add(Deck deck);
-
+public interface BaseGame {
     void start();
 
     void interrupt(Player source);

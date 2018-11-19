@@ -2,16 +2,15 @@ package com.exeter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Player implements BasePlayer{
     private int id;
     private Player winner;
     private Thread t;
-    private BaseMediator mediator;
+    private BaseGame mediator;
     private List<Card> hand = new ArrayList<>();
 
-    public Player(int id, BaseMediator mediator){
+    public Player(int id, BaseGame mediator){
         this.id = id;
         this.mediator = mediator;
     }

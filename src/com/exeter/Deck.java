@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Deck {
     private List<Card> cards = new ArrayList<>();
-    private BaseMediator mediator;
+    private BaseGame mediator;
     private int id;
 
-    public Deck(int id, BaseMediator mediator){
+    public Deck(int id, BaseGame mediator){
         this.id = id;
         this.mediator = mediator;
     }

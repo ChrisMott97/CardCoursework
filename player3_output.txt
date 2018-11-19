@@ -1,0 +1,45 @@
+<<<<<<< HEAD
+=======
+Player 3 initial hand: [1, 2, 2, 2]
+Player 3 drew Card 1 from Deck 3
+Player 3 discards Card 1 to Deck 4
+Player 3 hand: [1, 2, 2, 2]
+Player 3 drew Card 1 from Deck 3
+Player 3 discards Card 1 to Deck 4
+Player 3 hand: [1, 2, 2, 2]
+Player 3 drew Card 1 from Deck 3
+Player 3 discards Card 1 to Deck 4
+Player 3 hand: [1, 2, 2, 2]
+Player 3 drew Card 1 from Deck 3
+Player 3 discards Card 2 to Deck 4
+Player 3 hand: [1, 2, 2, 1]
+Player 3 drew Card 4 from Deck 3
+Player 3 discards Card 4 to Deck 4
+Player 3 hand: [1, 2, 2, 1]
+Player 3 drew Card 4 from Deck 3
+Player 3 discards Card 2 to Deck 4
+Player 3 hand: [1, 2, 1, 4]
+Player 3 drew Card 4 from Deck 3
+Player 3 discards Card 4 to Deck 4
+Player 3 hand: [1, 2, 1, 4]
+Player 3 drew Card 4 from Deck 3
+Player 3 discards Card 1 to Deck 4
+Player 3 hand: [1, 2, 4, 4]
+Player 3 drew Card 4 from Deck 3
+Player 3 discards Card 1 to Deck 4
+Player 3 hand: [2, 4, 4, 4]
+Player 3 drew Card 3 from Deck 3
+Player 3 discards Card 2 to Deck 4
+Player 3 hand: [4, 4, 4, 3]
+Player 3 drew Card 4 from Deck 3
+Player 3 discards Card 4 to Deck 4
+Player 3 hand: [4, 4, 3, 4]
+Player 3 drew Card 3 from Deck 3
+Player 3 discards Card 4 to Deck 4
+Player 3 hand: [4, 3, 4, 3]
+Player 3 drew Card 3 from Deck 3
+Player 3 discards Card 4 to Deck 4
+Player 3 hand: [3, 4, 3, 3]
+Player 1 told Player 3 that it has won
+Player 3 final hand: [3, 4, 3, 3]
+>>>>>>> develop
