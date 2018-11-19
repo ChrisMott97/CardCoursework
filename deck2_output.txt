@@ -1,5 +1,2 @@
-Deck 2 contents: [3]
-Deck 2 contents: [4, 4, 4, 4]
-Deck 2 contents: [4, 4, 4, 4]
-Deck 2 contents: [4, 4, 4, 4]
-Deck 2 contents: [3, 4, 3, 3]
+Deck 2 final state [4, 4, 4, 4]
+Deck 2 final state []

@@ -19,7 +19,7 @@ public class Mediator implements BaseMediator {
 
     public void start() {
         for (Player player : players){
-            logger.logInitialPlayerState(player);
+            logger.initialPlayerState(player);
             player.start();
         }
     }
@@ -28,7 +28,7 @@ public class Mediator implements BaseMediator {
         for (Player player : players) {
             player.interrupt(source);
         }
-        logger.logDecks(decks);
+        logger.decks(decks);
     }
 
     public synchronized boolean checkWin(Player player){
@@ -49,12 +49,12 @@ public class Mediator implements BaseMediator {
     public synchronized void takeTurn(Player player){
         if(drawCard(player)){
             discardCard(player);
-            logger.logPlayerState(player);
+            logger.playerState(player);
         }
     }
 
     public void finalPlayerState(Player player){
-        logger.logFinalPlayerState(player);
+        logger.finalise(player);
     }
 
     private boolean drawCard(Player player){
@@ -67,7 +67,7 @@ public class Mediator implements BaseMediator {
             return false;
         }
         player.getHand().add(card);
-        logger.logPlayerDraw(player, source, card);
+        logger.playerDraw(player, source, card);
         return true;
 
     }
@@ -87,7 +87,7 @@ public class Mediator implements BaseMediator {
                 burner.discardToBottom(chosen);
                 player.getHand().remove(chosen);
 
-                logger.logPlayerDiscard(player, burner, chosen);
+                logger.playerDiscard(player, burner, chosen);
             }
         }
     }

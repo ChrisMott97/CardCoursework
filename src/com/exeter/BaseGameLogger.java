@@ -3,15 +3,15 @@ package com.exeter;
 import java.util.List;
 
 public interface BaseGameLogger {
-    void logInitialPlayerState(Player player);
+    void initialPlayerState(Player player);
 
-    void logPlayerState(Player player);
+    void playerState(Player player);
 
-    void logFinalPlayerState(Player player);
+    void finalise(Player player);
 
-    void logPlayerDraw(Player player, Deck deck, Card card);
+    void playerDraw(Player player, Deck deck, Card card);
 
-    void logPlayerDiscard(Player player, Deck deck, Card card);
+    void playerDiscard(Player player, Deck deck, Card card);
 
-    void logDecks(List<Deck> decks);
+    void decks(List<Deck> decks);
 }
